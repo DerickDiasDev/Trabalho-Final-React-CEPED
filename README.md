@@ -1,6 +1,6 @@
 # Trabalho-Final-React-CEPD
 
-##Integrantes
+## Integrantes
 -Derick Mario de Sousa Dias
 -Leonardo Oliveira
 -Carolina Carvalho
