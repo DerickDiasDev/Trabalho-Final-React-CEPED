@@ -1,26 +1,26 @@
 import { createContext, useContext } from 'react';
 
 /**
- * AuthContext Shape (Interface)
- * Provides intellisense and default values for the authentication state
+ * Auth context contract.
+ * Provider is required; missing provider should fail fast in `useAuth`.
  */
-export const AuthContext = createContext({
-  user: null,
-  isAuthenticated: false,
-  isLoading: false,
-  login: () => {},
-  logout: () => {}
-});
+export const AuthContext = createContext(undefined);
 
 /**
- * Custom hook to consume the AuthContext safely
- * @returns {Object} Authentication context (user, login, logout, etc)
+ * Safely consume authentication state and actions from context.
+ * @returns {{
+ *   user: Object|null,
+ *   isAuthenticated: boolean,
+ *   isLoading: boolean,
+ *   login: Function,
+ *   logout: Function
+ * }}
  */
 export const useAuth = () => {
   const context = useContext(AuthContext);
 
   if (!context) {
-    throw new Error('useAuth deve ser usado dentro de um AuthProvider');
+    throw new Error('useAuth deve ser usado dentro de um AuthProvider.');
   }
 
   return context;

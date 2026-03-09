@@ -30,7 +30,7 @@
 }
 
 .title {
-  font-family: "Nunito", sans-serif;
+  font-family: Nunito, sans-serif;
   color: #2a3f60;
   font-size: 5rem;
   font-weight: 700;
@@ -48,7 +48,7 @@
 }
 
 .subtitle {
-  font-family: "Nunito", sans-serif;
+  font-family: Nunito, sans-serif;
   color: #2a3f60;
   font-size: 1.125rem;
   font-weight: 600;
@@ -78,6 +78,14 @@
 
 .action {
   margin-top: 10px;
+}
+
+.errorMessage {
+  margin: -8px 0 4px;
+  color: #a02d2d;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 /* Responsividade Mobile */

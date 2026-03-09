@@ -10,7 +10,7 @@ export const Button = ({ text, onClick, type = "button", disabled = false }) => 
       disabled={disabled}
     >
       {text}
-      <img src={arrowImg} alt="Seta" className={styles.icon} />
+      <img src={arrowImg} alt="" aria-hidden="true" className={styles.icon} />
     </button>
   );
 };
