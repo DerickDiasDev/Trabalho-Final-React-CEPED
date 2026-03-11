@@ -1,0 +1,17 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  text-align: center;
+  gap: 12px;
+}
+
+.not-found h1 {
+  font-size: 5rem;
+  color: var(--brand-primary);
+  font-family: var(--font-display);
+}
+
+.not-found p { color: var(--text-mid); font-size: 1.05rem; }
