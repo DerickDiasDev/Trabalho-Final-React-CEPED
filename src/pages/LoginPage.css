@@ -89,3 +89,20 @@
   padding: 10px 14px;
   text-align: center;
 }
+
+@media (max-width: 425px) {
+  .login-card {
+    max-width: 100%;
+    min-height: 100dvh;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 40px 24px;
+    border-radius: 0px;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    animation: none;
+  }
+}

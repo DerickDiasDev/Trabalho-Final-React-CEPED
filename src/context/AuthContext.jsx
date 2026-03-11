@@ -45,7 +45,9 @@ export function AuthProvider({ children }) {
           const users = await usersRes.json();
           found = users.find((u) => u.username === username) || { username };
         }
-      } catch {}
+      } catch {
+        // Fallback to username-only if user fetch fails
+      }
       setToken(receivedToken);
       setUser(found);
       localStorage.setItem("valy_token", receivedToken);
