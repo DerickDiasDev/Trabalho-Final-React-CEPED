@@ -84,12 +84,6 @@ export default function DetalhesPage() {
     navigate("/dashboard", { replace: true });
   }
 
-  reset({
-    name: item.name,
-    quantity: item.quantity,
-    expirationDate: item.expirationDate,
-  });
-
   return (
     <div className="detalhe-card">
       <Link to="/dashboard" className="back-btn">
