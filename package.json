@@ -1,32 +1,11 @@
 {
-<<<<<<< HEAD
-  "name": "valy",
-=======
   "name": "trabalho-final-react-ceped",
->>>>>>> 3a838f3205687052fa792170e51f48f8c1ee9af5
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-<<<<<<< HEAD
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.2",
-    "react-hook-form": "^7.53.0"
-  },
-  "devDependencies": {
-    "@types/react": "^18.3.5",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.3.1",
-    "vite": "^5.4.2"
-  }
-}
-=======
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -46,4 +25,3 @@
     "vite": "^7.2.4"
   }
 }
->>>>>>> 3a838f3205687052fa792170e51f48f8c1ee9af5
