@@ -34,7 +34,7 @@ export default function LoginPage() {
     <div className="login-bg">
       <div className="login-card">
         <div className="login-logo">
-          <img src="../logo.svg" alt="" />
+          <img src="/logo.svg" alt="Valy logo" />
           <div className="login-logo-title">Valy</div>
           <div className="login-logo-sub">Gestor de Validade de Alimentos</div>
         </div>

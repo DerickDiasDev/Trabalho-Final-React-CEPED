@@ -2,12 +2,6 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const AuthContext = createContext(null);
 
-/**
- * AuthProvider
- * - Persiste token no localStorage
- * - Expõe: user, token, login(), logout(), isAuthenticated
- * - Login consome a FakeStore API: POST /auth/login
- */
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(
     () => localStorage.getItem("valy_token") || null,
@@ -23,12 +17,6 @@ export function AuthProvider({ children }) {
 
   const isAuthenticated = Boolean(token);
 
-  /**
-   * login – chama FakeStore API e salva o token
-   * @param {string} username
-   * @param {string} password
-   * @returns {{ success: boolean, message?: string }}
-   */
   async function login(username, password) {
     setLoading(true);
     try {
@@ -47,14 +35,17 @@ export function AuthProvider({ children }) {
       }
 
       const data = await res.json();
-      // FakeStore retorna { token: "..." }
+
       const receivedToken = data.token;
 
-      // Busca dados do usuário para exibir nome na interface
-      const usersRes = await fetch("https://fakestoreapi.com/users");
-      const users = await usersRes.json();
-      const found = users.find((u) => u.username === username) || { username };
-
+      let found = { username };
+      try {
+        const usersRes = await fetch("https://fakestoreapi.com/users");
+        if (usersRes.ok) {
+          const users = await usersRes.json();
+          found = users.find((u) => u.username === username) || { username };
+        }
+      } catch {}
       setToken(receivedToken);
       setUser(found);
       localStorage.setItem("valy_token", receivedToken);

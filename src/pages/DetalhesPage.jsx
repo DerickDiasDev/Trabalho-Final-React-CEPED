@@ -1,28 +1,24 @@
-import { useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
-import { useForm } from 'react-hook-form'
-import { useFood } from '../context/FoodContext'
-import StatusBadge from '../components/StatusBadge'
-import ConfirmModal from '../components/ConfirmModal'
-import { useToast } from '../hooks/useToast'
-import ToastContainer from '../components/Toast'
-import './DetalhesPage.css'
+import { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useFood } from "../context/FoodContext";
+import StatusBadge from "../components/StatusBadge";
+import ConfirmModal from "../components/ConfirmModal";
+import { useToast } from "../hooks/useToast";
+import ToastContainer from "../components/Toast";
+import "./DetalhesPage.css";
 
-/**
- * DetalhesPage – rota dinâmica: /detalhes/:id
- * Exibe os dados do item e permite edição via react-hook-form
- * Permite excluir o item com confirmação
- */
 export default function DetalhesPage() {
-  const { id }     = useParams()
-  const navigate   = useNavigate()
-  const { getItem, updateItem, removeItem, calcStatus, calcDaysLeft } = useFood()
-  const { toasts, addToast, removeToast } = useToast()
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const { getItem, updateItem, removeItem, calcStatus, calcDaysLeft } =
+    useFood();
+  const { toasts, addToast, removeToast } = useToast();
 
-  const item = getItem(id)
+  const item = getItem(id);
 
-  const [isEditing, setIsEditing]     = useState(false)
-  const [showDelete, setShowDelete]   = useState(false)
+  const [isEditing, setIsEditing] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
 
   const {
     register,
@@ -31,52 +27,76 @@ export default function DetalhesPage() {
     reset,
   } = useForm({
     defaultValues: item
-      ? { name: item.name, quantity: item.quantity, expirationDate: item.expirationDate }
+      ? {
+          name: item.name,
+          quantity: item.quantity,
+          expirationDate: item.expirationDate,
+        }
       : {},
-  })
+  });
 
-  // Item não encontrado
+  useEffect(() => {
+    if (!item) return;
+
+    reset({
+      name: item.name,
+      quantity: item.quantity,
+      expirationDate: item.expirationDate,
+    });
+  }, [item, reset]);
+
   if (!item) {
     return (
       <div className="not-found">
         <h1>404</h1>
         <p>Item não encontrado.</p>
-        <Link to="/dashboard" className="btn btn-primary" style={{ marginTop: 12 }}>
+        <Link
+          to="/dashboard"
+          className="btn btn-primary"
+          style={{ marginTop: 12 }}
+        >
           ← Voltar ao Dashboard
         </Link>
       </div>
-    )
+    );
   }
 
-  const status   = calcStatus(item.expirationDate)
-  const daysLeft = calcDaysLeft(item.expirationDate)
+  const status = calcStatus(item.expirationDate);
+  const daysLeft = calcDaysLeft(item.expirationDate);
 
   function onSave(data) {
     updateItem(item.id, {
-      name: data.name.trim(),
+      name: data.name,
       quantity: Number(data.quantity),
       expirationDate: data.expirationDate,
-    })
-    addToast('Item atualizado com sucesso!', 'success')
-    setIsEditing(false)
+    });
+    addToast("Item atualizado com sucesso!", "success");
+    setIsEditing(false);
   }
 
   function handleCancelEdit() {
-    reset()
-    setIsEditing(false)
+    reset();
+    setIsEditing(false);
   }
 
   function handleDeleteConfirm() {
-    removeItem(item.id)
-    navigate('/dashboard', { replace: true })
+    removeItem(item.id);
+    navigate("/dashboard", { replace: true });
   }
+
+  reset({
+    name: item.name,
+    quantity: item.quantity,
+    expirationDate: item.expirationDate,
+  });
 
   return (
     <div className="detalhe-card">
-      <Link to="/dashboard" className="back-btn">← Voltar</Link>
+      <Link to="/dashboard" className="back-btn">
+        ← Voltar
+      </Link>
 
       <div className="card">
-        {/* Cabeçalho com nome e status */}
         <div className="detalhe-header">
           <h2 className="detalhe-title">{item.name}</h2>
           <StatusBadge status={status} daysLeft={daysLeft} />
@@ -86,11 +106,8 @@ export default function DetalhesPage() {
           Cadastrado em: {formatDate(item.createdAt)}
         </p>
 
-        {/* Formulário de edição / visualização */}
         <form onSubmit={handleSubmit(onSave)} noValidate>
           <div className="detalhe-form">
-
-            {/* Nome */}
             <div className="form-group">
               <label className="form-label" htmlFor="det-name">
                 Nome <span>*</span>
@@ -98,17 +115,19 @@ export default function DetalhesPage() {
               <input
                 id="det-name"
                 type="text"
-                className={`form-input ${errors.name ? 'error' : ''}`}
+                className={`form-input ${errors.name ? "error" : ""}`}
                 disabled={!isEditing}
-                {...register('name', {
-                  required: 'Nome é obrigatório',
-                  minLength: { value: 2, message: 'Mínimo 2 caracteres' },
+                {...register("name", {
+                  setValueAs: (value) => value.trim(),
+                  required: "Nome é obrigatório",
+                  minLength: { value: 2, message: "Mínimo 2 caracteres" },
                 })}
               />
-              {errors.name && <span className="form-error">{errors.name.message}</span>}
+              {errors.name && (
+                <span className="form-error">{errors.name.message}</span>
+              )}
             </div>
 
-            {/* Quantidade + Vencimento */}
             <div className="form-row">
               <div className="form-group">
                 <label className="form-label" htmlFor="det-qty">
@@ -118,14 +137,16 @@ export default function DetalhesPage() {
                   id="det-qty"
                   type="number"
                   min={1}
-                  className={`form-input ${errors.quantity ? 'error' : ''}`}
+                  className={`form-input ${errors.quantity ? "error" : ""}`}
                   disabled={!isEditing}
-                  {...register('quantity', {
-                    required: 'Obrigatório',
-                    min: { value: 1, message: 'Mínimo 1' },
+                  {...register("quantity", {
+                    required: "Obrigatório",
+                    min: { value: 1, message: "Mínimo 1" },
                   })}
                 />
-                {errors.quantity && <span className="form-error">{errors.quantity.message}</span>}
+                {errors.quantity && (
+                  <span className="form-error">{errors.quantity.message}</span>
+                )}
               </div>
 
               <div className="form-group">
@@ -135,15 +156,18 @@ export default function DetalhesPage() {
                 <input
                   id="det-exp"
                   type="date"
-                  className={`form-input ${errors.expirationDate ? 'error' : ''}`}
+                  className={`form-input ${errors.expirationDate ? "error" : ""}`}
                   disabled={!isEditing}
-                  {...register('expirationDate', { required: 'Obrigatório' })}
+                  {...register("expirationDate", { required: "Obrigatório" })}
                 />
-                {errors.expirationDate && <span className="form-error">{errors.expirationDate.message}</span>}
+                {errors.expirationDate && (
+                  <span className="form-error">
+                    {errors.expirationDate.message}
+                  </span>
+                )}
               </div>
             </div>
 
-            {/* Ações – renderização condicional baseada em isEditing */}
             <div className="detalhe-actions">
               {isEditing ? (
                 <>
@@ -185,7 +209,6 @@ export default function DetalhesPage() {
         </form>
       </div>
 
-      {/* Modal exclusão */}
       <ConfirmModal
         isOpen={showDelete}
         title={`Excluir "${item.name}"?`}
@@ -196,11 +219,11 @@ export default function DetalhesPage() {
 
       <ToastContainer toasts={toasts} onRemove={removeToast} />
     </div>
-  )
+  );
 }
 
 function formatDate(dateStr) {
-  if (!dateStr) return '—'
-  const [y, m, d] = dateStr.split('-')
-  return `${d}/${m}/${y}`
+  if (!dateStr) return "—";
+  const [y, m, d] = dateStr.split("-");
+  return `${d}/${m}/${y}`;
 }
