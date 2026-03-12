@@ -7,6 +7,24 @@
   gap: 8px;
 }
 
+.table-title-wrapper {
+  display: flex;
+  gap: 8px;
+}
+
+.image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  border-radius: 4px;
+  background-color: var(--brand-primary);
+}
+
+.image-container img {
+  height: 2rem;
+  padding: 2px;
+}
 .table-title {
   font-weight: 800;
   font-size: 1rem;
