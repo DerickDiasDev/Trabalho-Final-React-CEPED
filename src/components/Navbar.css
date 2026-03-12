@@ -3,13 +3,20 @@
   border-bottom: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
   padding: 0 24px;
-  height: 64px;
+  height: auto;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   position: sticky;
   top: 0;
   z-index: 100;
+}
+
+.navbar-wrapper {
+  display: flex;
+  width: 100%;
+  max-width: 1440px;
+  justify-content: space-between;
 }
 
 .navbar-brand {
@@ -24,8 +31,12 @@
   text-decoration: none;
 }
 
+.navbar-brand img {
+  height: 50%;
+}
+
 .navbar-brand span {
-  color: var(--text-dark);
+  color: var(--brand-primary);
 }
 
 .navbar-actions {
@@ -41,22 +52,25 @@
 }
 
 .btn-logout {
-  background: none;
-  border: 1.5px solid var(--border);
+  background-color: var(--brand-primary);
+  border: none;
   border-radius: var(--radius-sm);
-  color: var(--text-mid);
+  color: white;
   font-family: var(--font-main);
   font-size: 0.875rem;
   font-weight: 600;
-  padding: 6px 14px;
+  padding: 12px 12px;
   cursor: pointer;
   display: flex;
   align-items: center;
   gap: 6px;
   transition: all 0.2s;
 }
+
+.btn-logout img {
+  height: 1.5rem;
+}
+
 .btn-logout:hover {
-  background: var(--danger-bg);
-  border-color: var(--danger);
-  color: var(--danger);
+  background: var(--danger);
 }
