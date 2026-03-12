@@ -17,7 +17,7 @@ export default function ProductsTable({
   return (
     <div className="card">
       <div className="table-header">
-        <div className="table-title">🥦 Produtos cadastrados</div>
+        <h4 className="table-title">🥦 Produtos cadastrados</h4>
         <SearchInput value={search} onChange={onSearch} />
       </div>
 

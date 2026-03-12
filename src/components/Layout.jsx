@@ -1,11 +1,7 @@
-import { Outlet } from 'react-router-dom'
-import Navbar from './Navbar'
-import './Layout.css'
+import { Outlet } from "react-router-dom";
+import Navbar from "./Navbar";
+import "./Layout.css";
 
-/**
- * Layout – shell das páginas privadas
- * Renderiza: Navbar + <Outlet /> (página filha)
- */
 export default function Layout() {
   return (
     <div className="app-shell">
@@ -14,5 +10,5 @@ export default function Layout() {
         <Outlet />
       </main>
     </div>
-  )
+  );
 }
