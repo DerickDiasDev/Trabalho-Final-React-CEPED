@@ -8,6 +8,7 @@ import EmptyState from "../components/EmptyState";
 import StatsRow from "../components/StatsRow";
 import ConfirmModal from "../components/ConfirmModal";
 import Toast from "../components/Toast";
+import ProductsTable from "../components/ProductsTable";
 
 export default function DashboardPage() {
   const { items, stats, removeItem, calcStatus, calcDaysLeft } = useFood();

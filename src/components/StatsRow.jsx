@@ -1,3 +1,5 @@
+import "./StatsRow.css";
+
 export default function StatsRow({ stats }) {
   return (
     <div className="stats-row">

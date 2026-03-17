@@ -24,7 +24,7 @@ export default function Navbar() {
         </Link>
 
         <div className="navbar-actions">
-          <span className="navbar-user">Olá, {firstName} 👋</span>
+          <span className="navbar-user">Olá, {firstName}!</span>
 
           <button className="btn-logout" onClick={handleLogout}>
             <img src="log-off.svg" alt="icone desligar" />

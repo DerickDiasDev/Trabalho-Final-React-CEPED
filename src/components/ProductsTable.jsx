@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import StatusBadge from "./StatusBadge";
 import SearchInput from "./SearchInput";
-import { formatDate } from "../utils/date";
+import { formatDate } from "../utils/formatDate";
 import "./ProductsTable.css";
 
 export default function ProductsTable({
@@ -17,7 +17,15 @@ export default function ProductsTable({
   return (
     <div className="card">
       <div className="table-header">
-        <div className="table-title">🥦 Produtos cadastrados</div>
+        <div className="table-title-wrapper">
+          <div className="image-container">
+            <img
+              src="produtos-cadastrados-icon.svg"
+              alt="Prancheta com uma confirmação"
+            />
+          </div>
+          <h4 className="table-title">Produtos cadastrados</h4>
+        </div>
         <SearchInput value={search} onChange={onSearch} />
       </div>
 

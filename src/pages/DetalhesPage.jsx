@@ -7,6 +7,7 @@ import ConfirmModal from "../components/ConfirmModal";
 import { useToast } from "../hooks/useToast";
 import ToastContainer from "../components/Toast";
 import "./DetalhesPage.css";
+import { formatDate } from "../utils/formatDate";
 
 export default function DetalhesPage() {
   const { id } = useParams();
@@ -214,10 +215,4 @@ export default function DetalhesPage() {
       <ToastContainer toasts={toasts} onRemove={removeToast} />
     </div>
   );
-}
-
-function formatDate(dateStr) {
-  if (!dateStr) return "—";
-  const [y, m, d] = dateStr.split("-");
-  return `${d}/${m}/${y}`;
 }

@@ -5,12 +5,12 @@ export default function EmptyState() {
   return (
     <div className="card">
       <div className="empty-state">
-        <div className="empty-state-icon">📦</div>
+        <img src="no-items.png" alt="a logo da marca em uma caixa" />
         <div className="empty-state-title">
-          Seus alimentos ainda não foram cadastrados
+          <h4>Seus alimentos ainda não foram cadastrados</h4>
         </div>
         <div className="empty-state-sub">
-          Comece adicionando seu primeiro item para acompanhar a validade
+          <p>Comece adicionando seu primeiro item para acompanhar a validade</p>
         </div>
         <Link
           to="/cadastro"
